@@ -4,11 +4,11 @@ import 'package:process_run/cmd_run.dart';
 import 'package:process_run/shell_run.dart';
 
 class ClientConnect {
-  static LeagueClientBo? getConnectInfo() {
+  static Future<LeagueClientBo> getConnectInfo() {
     final shell = ProcessCmd(
         "wmic PROCESS WHERE name='LeagueClientUx.exe' GET commandline", [],
         runInShell: true);
-    runCmd(shell).then((value) {
+    return runCmd(shell).then((value) {
       String cmdLine = value.outText;
       if (cmdLine.isNotEmpty && cmdLine.length > 10) {
         int port = int.parse(cmdLine.split("--app-port=")[1].split('"')[0]);
@@ -16,13 +16,12 @@ class ClientConnect {
         final bytes = utf8.encode(
             "riot:${cmdLine.split('--remoting-auth-token=')[1].split('"')[0]}");
         String basic = "Basic ${base64.encode(bytes)}";
-        // print(
-        //     "port is $port pid is $pid password is $basic  origin password riot:${cmdLine.split('--remoting-auth-token=')[1].split('"')[0]}");
+        print(
+            "port is $port pid is $pid password is $basic");
         return LeagueClientBo(port, basic, pid);
       } else {
-        return null;
+        return Future.error("not found");
       }
     });
-    return null;
   }
 }
