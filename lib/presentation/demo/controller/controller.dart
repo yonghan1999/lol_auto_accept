@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:flutter_dashboard/core/app_export.dart';
-import 'package:flutter_dashboard/data/lcu.dart';
-import 'package:flutter_dashboard/data/utils/client_connect.dart';
+import 'package:lol_auto_accept/core/app_export.dart';
+import 'package:lol_auto_accept/data/lcu.dart';
+import 'package:lol_auto_accept/data/utils/client_connect.dart';
 
 class DemoController extends GetxController {
   RxInt isConnected = 0.obs;

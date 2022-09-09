@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:flutter_dashboard/data/model/league_client_bo.dart';
+import 'package:lol_auto_accept/data/model/league_client_bo.dart';
 import 'package:process_run/cmd_run.dart';
 import 'package:process_run/shell_run.dart';
 

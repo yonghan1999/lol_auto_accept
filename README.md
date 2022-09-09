@@ -1,4 +1,4 @@
-# flutter_dashboard
+# lol_auto_accept
 
 A new Flutter project.
 

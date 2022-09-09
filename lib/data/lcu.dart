@@ -1,5 +1,5 @@
-import 'package:flutter_dashboard/core/app_export.dart';
-import 'package:flutter_dashboard/data/model/league_client_bo.dart';
+import 'package:lol_auto_accept/core/app_export.dart';
+import 'package:lol_auto_accept/data/model/league_client_bo.dart';
 import 'package:get/get_connect/http/src/request/request.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
 

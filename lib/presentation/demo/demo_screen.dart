@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dashboard/core/app_export.dart';
-import 'package:flutter_dashboard/presentation/demo/controller/controller.dart';
+import 'package:lol_auto_accept/core/app_export.dart';
+import 'package:lol_auto_accept/presentation/demo/controller/controller.dart';
 
 class HomePage extends GetWidget<DemoController> {
   const HomePage({Key? key}) : super(key: key);

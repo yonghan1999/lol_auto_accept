@@ -1,5 +1,5 @@
-import 'package:flutter_dashboard/data/lcu.dart';
-import 'package:flutter_dashboard/presentation/demo/controller/controller.dart';
+import 'package:lol_auto_accept/data/lcu.dart';
+import 'package:lol_auto_accept/presentation/demo/controller/controller.dart';
 import 'package:get/get.dart';
 
 class DemoBinding extends Bindings {
