@@ -13,6 +13,8 @@ class DemoController extends GetxController {
 
   Timer? toolLoop;
 
+  RxString poroImg = "assets/images/sleep.png".obs;
+
   @override
   void onInit() {
     connectGame = Timer.periodic(const Duration(seconds: 2), (timer) {
@@ -21,13 +23,17 @@ class DemoController extends GetxController {
         Get.find<LcuApi>().setHttpClient(value);
         isConnected.value = 1;
         if (ProgressDialogUtils.isProgressVisible) {
+          poroImg.value = "assets/images/happy.png";
+          // update();
           ProgressDialogUtils.hideProgressDialog();
         }
-        if(toolLoop == null || !(toolLoop!.isActive)) {
+        if (toolLoop == null || !(toolLoop!.isActive)) {
           enableTool();
         }
       }).catchError((error, stackTrace) {
         if (!ProgressDialogUtils.isProgressVisible) {
+          poroImg.value = "assets/images/sleep.png";
+          // update();
           ProgressDialogUtils.showProgressDialog();
         }
         if (toolLoop != null && toolLoop!.isActive) {
@@ -78,6 +84,11 @@ class DemoController extends GetxController {
 
   void changeAutoAcceptState() {
     isAccept.value = !(isAccept.value);
-    update();
+    if(isAccept.value) {
+      poroImg.value = "assets/images/thank.png";
+    }
+    else {
+      poroImg.value = "assets/images/happy.png";
+    }
   }
 }

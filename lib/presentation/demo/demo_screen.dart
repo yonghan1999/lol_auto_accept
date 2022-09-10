@@ -9,37 +9,41 @@ class HomePage extends GetWidget<DemoController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SingleChildScrollView(
-          child: Center(
-          child: Column(
-            children: [
-              SizedBox(
-                height: 200,
-                child: Image.asset('assets/logo.png'),
-              ),
-              const SizedBox(
-                height: 23,
-              ),
-              Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                padding: const EdgeInsets.all(10),
-                child: Text("auto_accept".tr, style: const TextStyle(fontSize: 24),),
-              ),
-              ObxValue(
-                (data) => CupertinoSwitch(
-                  value: data.value,
-                  onChanged: data,
+      body: SingleChildScrollView(
+        child: Center(
+            child: Column(
+          children: [
+            SizedBox(
+              height: 200,
+              child: ObxValue((data) => Image.asset(controller.poroImg.value),
+                  controller.poroImg),
+            ),
+            const SizedBox(
+              height: 23,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  child: Text(
+                    "auto_accept".tr,
+                    style: const TextStyle(fontSize: 24),
+                  ),
                 ),
-                controller.isAccept,
-              ),
-            ],
-          )
-            ],
-          )
-          ),
-        ), 
-      );
+                Obx(() {
+                  return CupertinoSwitch(
+                    value: controller.isAccept.value,
+                    onChanged: (value) {
+                      controller.changeAutoAcceptState();
+                    },
+                  );
+                })
+              ],
+            )
+          ],
+        )),
+      ),
+    );
   }
 }
