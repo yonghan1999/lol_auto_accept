@@ -29,7 +29,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
   //定义屏幕尺寸
   long width = 333;
   long height = 333;
-  Win32Window::Size size(333, 333);
+  Win32Window::Size size(width, height);
 
   //获取屏幕大小
   int scrWidth, scrHeight;
@@ -40,7 +40,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
   long x = (scrWidth - width) / 2;
   long y = (scrHeight - height) / 2;
   Win32Window::Point origin(x, y);
-  if (!window.CreateAndShow(L"lol_auto_accept", origin, size)) {
+  if (!window.CreateAndShow(L"lol tool", origin, size)) {
     return EXIT_FAILURE;
   }
   window.SetQuitOnClose(true);

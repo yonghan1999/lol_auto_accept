@@ -4,7 +4,7 @@ project(lol_auto_accept LANGUAGES CXX)
 
 # The name of the executable created for the application. Change this to change
 # the on-disk name of your application.
-set(BINARY_NAME "lol_auto_accept")
+set(BINARY_NAME "lol tool")
 
 # Explicitly opt in to modern CMake behaviors to avoid warnings with recent
 # versions of CMake.
