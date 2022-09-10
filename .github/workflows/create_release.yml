@@ -12,15 +12,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Build project # This would actually build your project, using zip for an example artifact
         uses: actions/checkout@v3
+      - name: Build project # This would actually build your project, using zip for an example artifact
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.x'
-        run: flutter config --enable-windows-desktop
-        run: flutter build windows --release
-        uses: vimtor/action-zip@v1
+      - run: flutter config --enable-windows-desktop
+      - run: flutter build windows --release
+      - uses: vimtor/action-zip@v1
         with:
           files: build/windows/runner/Release/
           dest: release.zip
