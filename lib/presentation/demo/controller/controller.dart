@@ -23,8 +23,12 @@ class DemoController extends GetxController {
         Get.find<LcuApi>().setHttpClient(value);
         isConnected.value = 1;
         if (ProgressDialogUtils.isProgressVisible) {
-          poroImg.value = "assets/images/happy.png";
-          // update();
+          if(isAccept.value) {
+            poroImg.value = "assets/images/thank.png";
+          }
+          else {
+            poroImg.value = "assets/images/happy.png";
+          }
           ProgressDialogUtils.hideProgressDialog();
         }
         if (toolLoop == null || !(toolLoop!.isActive)) {
@@ -34,7 +38,7 @@ class DemoController extends GetxController {
         if (!ProgressDialogUtils.isProgressVisible) {
           poroImg.value = "assets/images/sleep.png";
           // update();
-          ProgressDialogUtils.showProgressDialog();
+          ProgressDialogUtils.showTitleProgressDialog("connecting_client".tr);
         }
         if (toolLoop != null && toolLoop!.isActive) {
           disableTool();
@@ -47,7 +51,7 @@ class DemoController extends GetxController {
   @override
   void onReady() {
     if (isConnected.value == 0) {
-      ProgressDialogUtils.showProgressDialog();
+      ProgressDialogUtils.showTitleProgressDialog("connecting_client".tr);
     }
     super.onReady();
   }
