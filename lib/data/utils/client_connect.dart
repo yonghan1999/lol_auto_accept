@@ -16,8 +16,6 @@ class ClientConnect {
         final bytes = utf8.encode(
             "riot:${cmdLine.split('--remoting-auth-token=')[1].split('"')[0]}");
         String basic = "Basic ${base64.encode(bytes)}";
-        print(
-            "port is $port pid is $pid password is $basic");
         return LeagueClientBo(port, basic, pid);
       } else {
         return Future.error("not found");

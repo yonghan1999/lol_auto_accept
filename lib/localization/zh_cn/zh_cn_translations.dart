@@ -63,5 +63,7 @@ final Map<String, String> zhCN = {
   "auto_accept" : "自动接受对局",
   "cancel_auto_accept" : "取消自动接受对局",
   "connecting_client" : "正在连接客户端",
-  "connecting" : "正在连接"
+  "connecting" : "正在连接",
+  "poro_tools" : "魄罗工具箱",
+  "common_settings": "常规设置",
 };

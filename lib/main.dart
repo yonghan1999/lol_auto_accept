@@ -9,7 +9,7 @@ void main() async {
   await WindowManager.instance.ensureInitialized();
   windowManager.waitUntilReadyToShow().then((_) async {
     // await windowManager.setSize(const Size(250, 75));
-    await windowManager.setSize(const Size(333, 333));
+    // await windowManager.setSize(const Size(333, 333));
     await windowManager.setMinimumSize(const Size(333, 333));
     await windowManager.center();
     await windowManager.show();
