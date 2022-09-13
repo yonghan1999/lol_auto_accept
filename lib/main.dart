@@ -8,11 +8,16 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await WindowManager.instance.ensureInitialized();
   windowManager.waitUntilReadyToShow().then((_) async {
+    // 隐藏windows自带窗口
+    await windowManager.setTitleBarStyle(
+      TitleBarStyle.hidden,
+      windowButtonVisibility: false,
+    );
     // await windowManager.setSize(const Size(250, 75));
     // await windowManager.setSize(const Size(333, 333));
     await windowManager.setMinimumSize(const Size(333, 333));
     await windowManager.center();
-    await windowManager.show();
+    await windowManager.waitUntilReadyToShow();
   });
   runApp(const MyApp());
 }
@@ -26,6 +31,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       translations: AppLocalization(),
+      theme: ThemeData(fontFamily: defaultFontFamily),
       locale: Get.deviceLocale, //for setting localization strings
       title: 'jhin',
       initialBinding: InitialBindings(),

@@ -6,9 +6,9 @@ import '../views/view_export.dart';
 
 class PanelController extends GetxController {
   List<SlideItem> slideItems = List.from([
-    SlideItem(title: "common_settings".tr, mainView: CommonSetting("page1"), icon: Icons.settings),
-    SlideItem(title: "webcaster_settings".tr, mainView: CommonSetting("page3"), icon: Icons.face),
-    SlideItem(title: "about".tr, mainView: CommonSetting("page4"), icon: Icons.info_outline),
+    SlideItem(title: "common_settings".tr, mainView: CommonSetting(), icon: Icons.settings),
+    // SlideItem(title: "webcaster_settings".tr, mainView: CommonSetting(), icon: Icons.face),
+    SlideItem(title: "about".tr, mainView: CommonSetting(), icon: Icons.info_outline),
   ]);
 
   late final PageController pageController;
@@ -39,7 +39,7 @@ class PanelController extends GetxController {
     for (int i = 0; i < list.length; i++) {
       var element = list.elementAt(i);
       listWidgetSlide.add(ListTile(
-        title: Text(element.title),
+        title: Text(element.title,),
         leading: Icon(element.icon),
         onTap: () {
           switchNavigationView(i);
