@@ -66,4 +66,6 @@ final Map<String, String> zhCN = {
   "connecting" : "正在连接",
   "poro_tools" : "魄罗工具箱",
   "common_settings": "常规设置",
+  "webcaster_settings": "主播设置",
+  "about": "关于",
 };

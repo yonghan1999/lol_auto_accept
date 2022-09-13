@@ -5,5 +5,5 @@ class SlideItem {
   String title;
   Widget mainView;
 
-  SlideItem(this.title, this.mainView, {this.icon});
+  SlideItem({required this.title, required this.mainView, this.icon});
 }

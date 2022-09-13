@@ -24,10 +24,10 @@ class PanelScreen extends GetWidget<PanelController> {
                       children: [
                         Image.asset(ImageConstant.imagePoroThank),
                         Container(
-                          padding: EdgeInsets.only(left: defaultPadding),
+                          padding: const EdgeInsets.only(left: defaultPadding),
                           child: Text(
                             "poro_tools".tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 27,
                             ),
                           ),

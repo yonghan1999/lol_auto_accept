@@ -6,10 +6,9 @@ import '../views/view_export.dart';
 
 class PanelController extends GetxController {
   List<SlideItem> slideItems = List.from([
-    SlideItem("common_settings".tr, const CommonSetting("page1")),
-    SlideItem("common_settings".tr, const CommonSetting("page2")),
-    SlideItem("common_settings".tr, const CommonSetting("page3")),
-    SlideItem("common_settings".tr, const CommonSetting("page4")),
+    SlideItem(title: "common_settings".tr, mainView: CommonSetting("page1"), icon: Icons.settings),
+    SlideItem(title: "webcaster_settings".tr, mainView: CommonSetting("page3"), icon: Icons.face),
+    SlideItem(title: "about".tr, mainView: CommonSetting("page4"), icon: Icons.info_outline),
   ]);
 
   late final PageController pageController;
