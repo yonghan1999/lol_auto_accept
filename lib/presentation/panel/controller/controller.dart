@@ -25,8 +25,8 @@ class PanelController extends GetxController {
         mainView: CommonSetting(),
         icon: Icons.settings),
     // SlideItem(title: "webcaster_settings".tr, mainView: CommonSetting(), icon: Icons.face),
-    SlideItem(
-        title: "about".tr, mainView: CommonSetting(), icon: Icons.info_outline),
+    // SlideItem(
+    //     title: "about".tr, mainView: CommonSetting(), icon: Icons.info_outline),
     // SlideItem(
     //     title: "dev",
     //     mainView: ChoseHero(),

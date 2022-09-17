@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lol_auto_accept/core/app_export.dart';
 import 'package:lol_auto_accept/data/lcu.dart';
+import 'package:lol_auto_accept/data/model/champ/select/champ_select_info.dart';
+import 'package:lol_auto_accept/data/model/champions/champion.dart';
 import 'package:lol_auto_accept/data/model/hero_info.dart';
 import 'package:lol_auto_accept/presentation/panel/controller/controller.dart';
 
@@ -15,11 +17,27 @@ class ChoseHeroController extends GetxController {
   /// 从客户端获取英雄列表，并生成列表
   Future<List<Widget>> get heroList async {
     List<Widget> res = List.empty(growable: true);
-    var heros = await Get.find<LcuApi>().getHero().then((value) {
-      return List.from(value);
+    var heroes = await Get.find<LcuApi>().getHero().then((value) {
+      return value;
+    }).onError((error, stackTrace) {
+      // TODO
+      return Future.value(List.empty());
     });
+
+    var ownedHeroes = await Get.find<LcuApi>().getOwnedHero().then((value){
+      Map<int,Champion> result = {};
+      for (var item in value) {
+        result[item.id] = item;
+      }
+      return result;
+    }).onError((error, stackTrace) {
+      // TODO
+      return Future.value({});
+    });
+    heroes.removeWhere((element) => !ownedHeroes.containsKey(element.id));
+
     var panelController = Get.find<PanelController>();
-    for (var element in heros) {
+    for (var element in heroes) {
       var item = GestureDetector(
         /// 点击时添加到列表
         onTap: () {

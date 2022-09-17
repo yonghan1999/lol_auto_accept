@@ -1,7 +1,10 @@
 import 'package:lol_auto_accept/core/app_export.dart';
+import 'package:lol_auto_accept/data/model/champ/select/champ_select_info.dart';
 import 'package:lol_auto_accept/data/model/hero_info.dart';
 import 'package:lol_auto_accept/data/model/league_client_bo.dart';
 import 'package:get/get_connect/http/src/request/request.dart';
+
+import 'model/champions/champion.dart';
 
 class LcuApi extends GetConnect {
 
@@ -70,6 +73,26 @@ class LcuApi extends GetConnect {
       }
     });
   }
+
+  Future<List<Champion>> getOwnedHero() {
+    return get<List<Champion>>(getOwnedChampions,decoder:(data) {
+      List<Champion> result = List.empty(growable: true);
+      var list = List.from(data);
+      for (var element in list) {
+        result.add(Champion.fromJsonMap(element));
+      }
+      return result;
+    },).then((value) {
+      if(value.body != null) {
+        return value.body!;
+      }
+      else {
+        return Future.error("empty response body");
+      }
+    });
+  }
+  
+
 
   void lockHero(int userActionId, int champId) {
     patch("$champSelectAction/$userActionId", {

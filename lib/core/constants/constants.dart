@@ -39,3 +39,4 @@ const String getTeamInfo = "/lol-champ-select/v1/session";
 const String gameSessionData = "/lol-gameflow/v1/session";
 const String champSelectSession = "/lol-champ-select/v1/session";
 const String champSelectAction = "/lol-champ-select/v1/session/actions";
+const String getOwnedChampions = "/lol-champions/v1/owned-champions-minimal";
