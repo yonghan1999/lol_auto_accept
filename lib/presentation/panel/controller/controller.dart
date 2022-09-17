@@ -78,16 +78,27 @@ class PanelController extends GetxController {
       bo.then((value) {
         var lcu = Get.find<LcuApi>();
         lcu.setHttpClient(value);
-        isConnected.value = 1;
+        if(isConnected.value == 0) {
+          isConnected.value = 1;
+        }
+        if ( isConnected.value == 1) {
+          // lol客户端是否已经准备就绪
+          lcu.settingReady().then((isReady){
+            if(isReady) {
+              // 启动工具
+              enableTool(value);
+              isConnected.value = 2;
+            }
+          });
+        }
         if (ProgressDialogUtils.isProgressVisible) {
           ProgressDialogUtils.hideProgressDialog();
-          // 启动工具
-          enableTool(value);
         }
       }).catchError((error, stackTrace) {
         if (!ProgressDialogUtils.isProgressVisible) {
           ProgressDialogUtils.showTitleProgressDialog("connecting_client".tr);
           disableTool();
+          isConnected.value = 0;
         }
       });
     });
@@ -118,12 +129,7 @@ class PanelController extends GetxController {
           List response = data;
           if (response.length == 3) {
             SocketJsonBody body = SocketJsonBody.fromJsonMap(response[2]);
-
-            // if (body.uri == gameSessionData) {
-            //   print("${json.encode(body.data)}\n\n");
-            // }
             if (body.uri == champSelectSession) {
-              // print("${json.encode(body.data)}\n\n");
               ChampSelectInfo info = ChampSelectInfo.fromJsonMap(body.data);
               var localPlayerCellId = info.localPlayerCellId;
               for (var action in info.actions) {
@@ -158,7 +164,6 @@ class PanelController extends GetxController {
                     }
                   }
                 }}
-              print("-----------------------");
             }
 
             //  当前游戏状态

@@ -103,6 +103,12 @@ class LcuApi extends GetConnect {
     });
   }
 
+  Future<bool> settingReady() {
+    return get(lolSettingReady).then((value) {
+      return value.body == true ? true : false;
+    });
+  }
+
 
 
 

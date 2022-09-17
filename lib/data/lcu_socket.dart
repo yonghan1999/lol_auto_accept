@@ -5,9 +5,9 @@ import 'model/league_client_bo.dart';
 
 class LcuSocket {
 
-  final Map<String, String> customHeaders = {};
+  Map<String, String> customHeaders = {};
 
-  late final String url;
+  late String url;
   LeagueClientBo? leagueClientBo;
 
    IOWebSocketChannel? channel;
@@ -35,6 +35,7 @@ class LcuSocket {
   void close() {
     if(channel != null) {
       channel!.sink.close();
+      channel = null;
     }
   }
 }
