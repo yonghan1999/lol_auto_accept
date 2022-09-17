@@ -13,12 +13,11 @@ class ClientConnect {
       if (cmdLine.isNotEmpty && cmdLine.length > 10) {
         int port = int.parse(cmdLine.split("--app-port=")[1].split('"')[0]);
         int pid = int.parse(cmdLine.split('--app-pid=')[1].split('"')[0]);
+        String password = cmdLine.split('--remoting-auth-token=')[1].split('"')[0];
         final bytes = utf8.encode(
-            "riot:${cmdLine.split('--remoting-auth-token=')[1].split('"')[0]}");
+            "riot:$password");
         String basic = "Basic ${base64.encode(bytes)}";
-        print(
-            "port is $port pid is $pid password is $basic");
-        return LeagueClientBo(port, basic, pid);
+        return LeagueClientBo(port, basic, pid, password);
       } else {
         return Future.error("not found");
       }

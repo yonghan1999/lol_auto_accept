@@ -27,8 +27,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
 
   FlutterWindow window(project);
   //定义屏幕尺寸
-  long width = 333;
-  long height = 333;
+  long width = 1280;
+  long height = 720;
   Win32Window::Size size(width, height);
 
   //获取屏幕大小

@@ -70,7 +70,7 @@ class DemoController extends GetxController {
   //  等待重新连接:Reconnect
   //
   void enableTool() {
-    toolLoop ??= Timer.periodic(const Duration(seconds: 1), (timer) {
+    toolLoop ??= Timer.periodic(const Duration(seconds: 3), (timer) {
       Get.find<LcuApi>().gameState().then((value) {
         if (value == "\"ReadyCheck\"" && isAccept.value) {
           Get.find<LcuApi>().accept();
