@@ -2,8 +2,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lol_auto_accept/core/app_export.dart';
 
+import '../controller/controller.dart';
+
 class CommonSettingController extends GetxController {
-  RxBool isAccept = RxBool(false);
+  // RxBool isAccept = RxBool(false);
+
+  RxBool get isAccept {
+    return Get.find<PanelController>().isAccept;
+  }
+
+  RxBool get isAutoSelect {
+    return Get.find<PanelController>().isAutoSelect;
+  }
+
+  void toChoseSelectHeroPage() {
+    Get.find<PanelController>().toChoseSelectHeroPage();
+  }
+
 }
 
 class CommonSetting extends StatelessWidget {
@@ -34,7 +49,7 @@ class CommonSetting extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      ListItemText("auto_accept".tr),
+                      listItemText("auto_accept".tr),
                       const Spacer(),
                       ObxValue((data) {
                         return CupertinoSwitch(
@@ -44,12 +59,15 @@ class CommonSetting extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      ListItemText("auto_chose_hero".tr),
+                      listItemText("auto_chose_hero".tr),
                       const Spacer(),
+                      IconButton(onPressed: (){
+                        controller.toChoseSelectHeroPage();
+                      }, icon: const Icon(Icons.menu)),
                       ObxValue((data) {
                         return CupertinoSwitch(
                             value: data.value, onChanged: data);
-                      }, controller.isAccept)
+                      }, controller.isAutoSelect)
                     ],
                   ),
                 ],
@@ -59,6 +77,6 @@ class CommonSetting extends StatelessWidget {
     );
   }
 
-  Widget ListItemText(String tras) =>
+  Widget listItemText(String tras) =>
       Text(tras.tr, style: const TextStyle(fontSize: 20));
 }

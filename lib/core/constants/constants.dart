@@ -13,3 +13,29 @@ const commonIconSize = 20.0;
 const commonFontSize = 20.0;
 
 const defaultFontFamily = "SourceHanSansCN";
+
+const nonHero = {"id":-1,"name":"无","alias":"None","squarePortraitPath":"/lol-game-data/assets/v1/champion-icons/-1.png","roles":[]};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/// api
+const String acceptGame = "/lol-matchmaking/v1/ready-check/accept";
+const String getGameState = "/lol-gameflow/v1/gameflow-phase";
+const String getHeroList = "/lol-game-data/assets/v1/champion-summary.json";
+const String getTeamInfo = "/lol-champ-select/v1/session";
+const String gameSessionData = "/lol-gameflow/v1/session";
+const String champSelectSession = "/lol-champ-select/v1/session";
+const String champSelectAction = "/lol-champ-select/v1/session/actions";

@@ -23,7 +23,7 @@ class AppRoutes {
   static List<GetPage> pages = [
     GetPage(
       name: initPage,
-      page: () => const PanelScreen(),
+      page: () => PanelScreen(),
       bindings: [
         PanelBinding(),
       ],

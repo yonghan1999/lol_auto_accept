@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -5,17 +7,18 @@ import 'core/app_export.dart';
 import 'routes/app_routes.dart';
 
 void main() async {
+  HttpOverrides.global = BadCertificateHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
   await WindowManager.instance.ensureInitialized();
   windowManager.waitUntilReadyToShow().then((_) async {
-    // 隐藏windows自带窗口
+    // 隐藏windows自带窗口 
     await windowManager.setTitleBarStyle(
       TitleBarStyle.hidden,
       windowButtonVisibility: false,
     );
     // await windowManager.setSize(const Size(250, 75));
     // await windowManager.setSize(const Size(333, 333));
-    await windowManager.setMinimumSize(const Size(333, 333));
+    await windowManager.setMinimumSize(const Size(1280, 720));
     await windowManager.center();
     await windowManager.waitUntilReadyToShow();
   });

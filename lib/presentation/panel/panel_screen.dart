@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:lol_auto_accept/core/app_export.dart';
 import 'package:lol_auto_accept/presentation/panel/controller/controller.dart';
@@ -17,8 +19,8 @@ class PanelScreen extends GetWidget<PanelController> {
               flex: 1,
               child: Container(
                 decoration: const BoxDecoration(
-                  border: Border(right: BorderSide(color: Colors.grey,width: 0.3))
-                ),
+                    border: Border(
+                        right: BorderSide(color: Colors.grey, width: 0.3))),
                 child: Column(
                   children: [
                     DrawerHeader(
@@ -78,7 +80,9 @@ class PanelScreen extends GetWidget<PanelController> {
                   color: Colors.transparent,
                   shape: const StadiumBorder(),
                   child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        windowManager.minimize();
+                      },
                       iconSize: 20,
                       icon: const Icon(Icons.minimize)),
                 ),
@@ -86,7 +90,9 @@ class PanelScreen extends GetWidget<PanelController> {
                   color: Colors.transparent,
                   shape: const StadiumBorder(),
                   child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        exit(0);
+                      },
                       iconSize: 20,
                       icon: const Icon(Icons.close)),
                 ),
