@@ -136,9 +136,17 @@ class PanelController extends GetxController {
                       Set bans = {};
                       bans.addAll(info.bans.myTeamBans);
                       bans.addAll(info.bans.theirTeamBans);
+                      for (var element in info.actions) {
+                        for (var item in element) {
+                          if(item.completed && item.championId != 0) {
+                            bans.add(item.championId);
+                          }
+                        }
+                      }
                       HeroInfo? hero = autoSelectList.firstWhereOrNull((element) => !bans.contains(autoSelectList));
                       // TODO 候选列表中的英雄都被ban了... 暂不处理
                       if (hero == null) {
+
                       }
                       else {
                         lcuApi.lockHero(userActionId,hero.id);
