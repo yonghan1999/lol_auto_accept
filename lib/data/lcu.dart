@@ -109,6 +109,15 @@ class LcuApi extends GetConnect {
     });
   }
 
+  void banHero(int userActionId, champId) {
+    patch("$champSelectAction/$userActionId", {
+      "actorCellId":userActionId,
+      "completed": true,
+      "type": "ban",
+      "championId": champId
+    });
+  }
+
 
 
 

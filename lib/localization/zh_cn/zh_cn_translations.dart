@@ -62,6 +62,7 @@ final Map<String, String> zhCN = {
   "welcome": "欢迎使用",
   "auto_accept": "开启后将自动接受对局（任意模式）",
   "auto_chose_hero": "开启后将在选择英雄阶段自动选择优先级列表中的英雄（无法选择英雄的模式除外）",
+  "auto_ban_hero": "开启后将在禁用英雄阶段自动禁用优先级列表中的英雄（无法禁用英雄的模式除外）",
   "cancel_auto_accept": "取消自动接受对局",
   "connecting_client": "正在连接客户端",
   "connecting": "正在连接",

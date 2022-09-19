@@ -10,7 +10,6 @@ import 'package:lol_auto_accept/data/model/hero_info.dart';
 import 'package:lol_auto_accept/data/model/league_client_bo.dart';
 import 'package:lol_auto_accept/data/model/socket_json_body.dart';
 import 'package:lol_auto_accept/data/utils/client_connect.dart';
-import 'package:lol_auto_accept/data/constant/json_api_event_type.dart';
 
 import '../model/slide_item.dart';
 import '../views/chose_hero.dart';
@@ -69,6 +68,10 @@ class PanelController extends GetxController {
   // 自动选择英雄列表
   RxList<HeroInfo> autoSelectList =
       RxList.filled(7, HeroInfo.fromJsonMap(nonHero));
+
+  // 自动选择英雄列表
+  RxList<HeroInfo> autoBanList =
+  RxList.filled(7, HeroInfo.fromJsonMap(nonHero));
 
   /// 检测游戏是否成功连接，初始化页面控制
   @override
@@ -159,7 +162,25 @@ class PanelController extends GetxController {
                       }
                     }
                     // TODO ban 英雄
-                    if (actionElement.type == "ban" && !actionElement.completed && isAutoSelect.value) {
+                    if (actionElement.type == "ban" && !actionElement.completed && isAutoBan.value) {
+                      Set used = {};
+                      used.addAll(info.bans.myTeamBans);
+                      used.addAll(info.bans.theirTeamBans);
+                      for (var element in info.actions) {
+                        for (var item in element) {
+                          if(item.championId != 0) {
+                            used.add(item.championId);
+                          }
+                        }
+                      }
+                      HeroInfo? hero = autoBanList.firstWhereOrNull((element) => !used.contains(element.id) && element.id != 0);
+                      // TODO 候选列表中的英雄都已经被ban了或者队友预选... 暂不处理
+                      if (hero == null) {
+
+                      }
+                      else {
+                        lcuApi.banHero(userActionId, hero.id);
+                      }
 
                     }
                   }
@@ -252,7 +273,10 @@ class PanelController extends GetxController {
     }
 
     // 添加选择英雄页面
-    listWidgetPage.add(ChoseHero());
+    /*------- 以下需要保持顺序 --------*/
+    listWidgetPage.add(ChoseHero(autoBanList,title: "ban"));
+    listWidgetPage.add(ChoseHero(autoSelectList,title: "pick"));
+    /*------- 以上需要保持顺序 --------*/
     pageList = listWidgetPage;
     slideList = listWidgetSlide;
   }
@@ -275,5 +299,10 @@ class PanelController extends GetxController {
   void toChoseSelectHeroPage() {
     var choseHeroIndex = pageList.length - 1;
     switchNavigationView(choseHeroIndex);
+  }
+
+  void toBanHeroPage() {
+    var banIndex = pageList.length - 2;
+    switchNavigationView(banIndex);
   }
 }

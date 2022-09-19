@@ -15,8 +15,16 @@ class CommonSettingController extends GetxController {
     return Get.find<PanelController>().isAutoSelect;
   }
 
+  RxBool get isAutoBan {
+    return Get.find<PanelController>().isAutoBan;
+  }
+
   void toChoseSelectHeroPage() {
     Get.find<PanelController>().toChoseSelectHeroPage();
+  }
+
+  void toBanHeroPage() {
+    Get.find<PanelController>().toBanHeroPage();
   }
 
 }
@@ -68,6 +76,19 @@ class CommonSetting extends StatelessWidget {
                         return CupertinoSwitch(
                             value: data.value, onChanged: data);
                       }, controller.isAutoSelect)
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      listItemText("auto_ban_hero".tr),
+                      const Spacer(),
+                      IconButton(onPressed: (){
+                        controller.toBanHeroPage();
+                      }, icon: const Icon(Icons.menu)),
+                      ObxValue((data) {
+                        return CupertinoSwitch(
+                            value: data.value, onChanged: data);
+                      }, controller.isAutoBan)
                     ],
                   ),
                 ],
