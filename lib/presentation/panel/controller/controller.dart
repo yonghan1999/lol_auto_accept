@@ -149,7 +149,7 @@ class PanelController extends GetxController {
                           }
                         }
                       }
-                      HeroInfo? hero = autoSelectList.firstWhereOrNull((element) => !bans.contains(autoSelectList) && element.id != 0);
+                      HeroInfo? hero = autoSelectList.firstWhereOrNull((element) => !bans.contains(element.id) && element.id != 0);
                       // TODO 候选列表中的英雄都被ban了... 暂不处理
                       if (hero == null) {
 
