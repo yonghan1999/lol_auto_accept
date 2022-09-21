@@ -4,6 +4,8 @@ import 'package:lol_auto_accept/data/lcu.dart';
 import 'package:lol_auto_accept/data/model/champions/champion.dart';
 import 'package:lol_auto_accept/data/model/hero_info.dart';
 
+import '../controller/controller.dart';
+
 const double _pagePadding = defaultPadding / 4;
 
 class ChoseHeroController extends GetxController {
@@ -11,7 +13,9 @@ class ChoseHeroController extends GetxController {
 
   final RxList<HeroInfo> selectList;
 
-  ChoseHeroController(this.selectList);
+  int fromPageIndex;
+
+  ChoseHeroController(this.selectList, this.fromPageIndex);
 
 
 
@@ -87,18 +91,22 @@ class ChoseHeroController extends GetxController {
     var index = selectList.indexOf(element);
     selectList[index] = HeroInfo.fromJsonMap(nonHero);
   }
+
+  void back() {
+    Get.find<PanelController>().pageController.jumpToPage(fromPageIndex);
+  }
 }
 
 @immutable
 class ChoseHero extends StatelessWidget {
   late ChoseHeroController controller;
 
-  ChoseHero(RxList<HeroInfo> list,{super.key, title}) {
+  ChoseHero(RxList<HeroInfo> list, int fromPageIndex,{super.key, title}) {
     if (title == null) {
-      controller = Get.put<ChoseHeroController>(ChoseHeroController(list));
+      controller = Get.put<ChoseHeroController>(ChoseHeroController(list,fromPageIndex));
     }
     else {
-      controller = Get.put<ChoseHeroController>(ChoseHeroController(list),tag: title);
+      controller = Get.put<ChoseHeroController>(ChoseHeroController(list,fromPageIndex),tag: title);
     }
   }
 
@@ -118,8 +126,19 @@ class ChoseHero extends StatelessWidget {
                 Expanded(
                     child: Container(
                   padding: const EdgeInsets.all(defaultPadding),
-                  child: Text("chose_hero".tr,
-                      style: const TextStyle(fontSize: 38)),
+                  child: Row(
+                    children: [
+                      IconButton(onPressed: (){
+                        controller.back();
+                      },
+                        icon: const Icon(Icons.arrow_back),
+                      ),
+                      Text(
+                        "${'common_settings'.tr}:",
+                        style: const TextStyle(fontSize: 38),
+                      )
+                    ],
+                  ),
                 ))
               ],
             )),

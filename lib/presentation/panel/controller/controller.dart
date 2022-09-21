@@ -71,7 +71,7 @@ class PanelController extends GetxController {
 
   // 自动选择英雄列表
   RxList<HeroInfo> autoBanList =
-  RxList.filled(7, HeroInfo.fromJsonMap(nonHero));
+      RxList.filled(7, HeroInfo.fromJsonMap(nonHero));
 
   /// 检测游戏是否成功连接，初始化页面控制
   @override
@@ -81,13 +81,13 @@ class PanelController extends GetxController {
       bo.then((value) {
         var lcu = Get.find<LcuApi>();
         lcu.setHttpClient(value);
-        if(isConnected.value == 0) {
+        if (isConnected.value == 0) {
           isConnected.value = 1;
         }
-        if ( isConnected.value == 1) {
+        if (isConnected.value == 1) {
           // lol客户端是否已经准备就绪
-          lcu.settingReady().then((isReady){
-            if(isReady) {
+          lcu.settingReady().then((isReady) {
+            if (isReady) {
               // 启动工具
               enableTool(value);
               isConnected.value = 2;
@@ -125,7 +125,6 @@ class PanelController extends GetxController {
     var lcuApi = Get.find<LcuApi>();
     socket.connectJsonEventApiSocket(bo);
     socket.channel!.stream.listen((message) {
-
       try {
         var data = json.decode(message);
         if (data is List) {
@@ -138,53 +137,57 @@ class PanelController extends GetxController {
               for (var action in info.actions) {
                 for (var actionElement in action) {
                   // 轮到你操作时
-                  if (actionElement.actorCellId == localPlayerCellId && actionElement.isInProgress) {
+                  if (actionElement.actorCellId == localPlayerCellId &&
+                      actionElement.isInProgress) {
                     var userActionId = actionElement.id;
                     // 轮到你选择英雄,并且开启了自动选英雄
-                    if (actionElement.type == "pick" && !actionElement.completed && isAutoSelect.value) {
+                    if (actionElement.type == "pick" &&
+                        !actionElement.completed &&
+                        isAutoSelect.value) {
                       Set bans = {};
                       bans.addAll(info.bans.myTeamBans);
                       bans.addAll(info.bans.theirTeamBans);
                       for (var element in info.actions) {
                         for (var item in element) {
-                          if(item.completed && item.championId != 0) {
+                          if (item.completed && item.championId != 0) {
                             bans.add(item.championId);
                           }
                         }
                       }
-                      HeroInfo? hero = autoSelectList.firstWhereOrNull((element) => !bans.contains(element.id) && element.id != 0);
+                      HeroInfo? hero = autoSelectList.firstWhereOrNull(
+                          (element) =>
+                              !bans.contains(element.id) && element.id != 0);
                       // TODO 候选列表中的英雄都被ban了... 暂不处理
                       if (hero == null) {
-
-                      }
-                      else {
-                        lcuApi.lockHero(userActionId,hero.id);
+                      } else {
+                        lcuApi.lockHero(userActionId, hero.id);
                       }
                     }
                     // TODO ban 英雄
-                    if (actionElement.type == "ban" && !actionElement.completed && isAutoBan.value) {
+                    if (actionElement.type == "ban" &&
+                        !actionElement.completed &&
+                        isAutoBan.value) {
                       Set used = {};
                       used.addAll(info.bans.myTeamBans);
                       used.addAll(info.bans.theirTeamBans);
                       for (var element in info.actions) {
                         for (var item in element) {
-                          if(item.championId != 0) {
+                          if (item.championId != 0) {
                             used.add(item.championId);
                           }
                         }
                       }
-                      HeroInfo? hero = autoBanList.firstWhereOrNull((element) => !used.contains(element.id) && element.id != 0);
+                      HeroInfo? hero = autoBanList.firstWhereOrNull((element) =>
+                          !used.contains(element.id) && element.id != 0);
                       // TODO 候选列表中的英雄都已经被ban了或者队友预选... 暂不处理
                       if (hero == null) {
-
-                      }
-                      else {
+                      } else {
                         lcuApi.banHero(userActionId, hero.id);
                       }
-
                     }
                   }
-                }}
+                }
+              }
             }
 
             //  当前游戏状态
@@ -199,7 +202,6 @@ class PanelController extends GetxController {
             //  游戏结束:EndOfGame
             //  等待重新连接:Reconnect
             if (body.uri == getGameState) {
-
               switch (body.data) {
                 case "None":
                   break;
@@ -208,7 +210,7 @@ class PanelController extends GetxController {
                 case "Matchmaking":
                   break;
                 case "ReadyCheck":
-                  if(isAccept.value) {
+                  if (isAccept.value) {
                     lcuApi.accept();
                   }
                   break;
@@ -228,8 +230,7 @@ class PanelController extends GetxController {
             }
           }
         }
-      }
-      catch (e, stacktrace) {
+      } catch (e, stacktrace) {
         debugPrintStack(stackTrace: stacktrace);
         // printError(info: "socket json parse error $message");
       }
@@ -274,8 +275,8 @@ class PanelController extends GetxController {
 
     // 添加选择英雄页面
     /*------- 以下需要保持顺序 --------*/
-    listWidgetPage.add(ChoseHero(autoBanList,title: "ban"));
-    listWidgetPage.add(ChoseHero(autoSelectList,title: "pick"));
+    listWidgetPage.add(ChoseHero(autoBanList, 0, title: "ban"));
+    listWidgetPage.add(ChoseHero(autoSelectList, 0, title: "pick"));
     /*------- 以上需要保持顺序 --------*/
     pageList = listWidgetPage;
     slideList = listWidgetSlide;
