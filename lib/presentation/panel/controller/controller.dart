@@ -283,8 +283,7 @@ class PanelController extends GetxController {
 
   // 切换页面
   void switchNavigationView(int i) {
-    pageController.animateToPage(i,
-        duration: const Duration(microseconds: 200), curve: Curves.linear);
+    pageController.jumpToPage(i);
   }
 
   // 获取当前页面
